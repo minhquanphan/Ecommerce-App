@@ -1,5 +1,37 @@
 # ecommerce_BE
 
+## Description
+
+A ecommerce platform web application built with MERN stack. This is the codebase for the MongoDB NodeJS and Express RESTful backend API.
+
+## Features
+
+This include all common features of a ecommerce platform.
+
+### CRUD User authentication and managing account (UserFlow)
+
+1. User can create account with email and password
+2. User can login with email and password
+3. Owner can see own user's information
+4. Owner can update own account profile
+5. Current user can see list of orders
+6. Users can checkout and pay for cart
+7. Users can top-up balance
+
+### CRUD product with admin access (ProductFlow)
+
+1. Admin can add product
+2. Admin can update product
+3. Admin can delete product
+4. Users can see All products, filter by category, search by keywords, sorted by Attributes
+
+### CRUD Order (OrderFlow)
+
+1. Author can create order
+2. User can see order detail
+3. Admin can see all order
+4. Users can Edit Cart, Delete Cart
+
 ## Project setup
 
 1. Generate express boiler plate
@@ -15,6 +47,7 @@
    ```console
    npm i nodemon cors bcryptjs dotenv
    npm i jsonwebtoken mongoose
+   npm install express-validator
    ```
 
 3. Add dev script
