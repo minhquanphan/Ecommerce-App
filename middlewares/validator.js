@@ -21,10 +21,4 @@ validators.checkObjectId = (paramId) => {
   }
   return true;
 };
-validators.statusValueCheck = (statusValue) => {
-  if ("accepted" == statusValue || "declined" == statusValue) {
-    return true;
-  }
-  throw new Error("Invalid status value");
-};
 module.exports = validators;
