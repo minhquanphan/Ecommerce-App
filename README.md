@@ -10,20 +10,22 @@ This include all common features of a ecommerce platform.
 
 ### CRUD User authentication and managing account (UserFlow)
 
-1. User can create account with email and password
-2. User can login with email and password
-3. Owner can see own user's information
-4. Owner can update own account profile
+1. User can create account with email and password ✅
+2. User can login with email and password ✅
+3. Owner can update own account profile ✅
+4. Owner can see own account profile ✅
 5. Current user can see list of orders
-6. Users can checkout and pay for cart
-7. Users can top-up balance
+6. Users can change password ✅
+7. Users can checkout and pay for cart
+8. Users can top-up balance
 
 ### CRUD product with admin access (ProductFlow)
 
 1. Admin can add product
 2. Admin can update product
 3. Admin can delete product
-4. Users can see All products, filter by category, search by keywords, sorted by Attributes
+4. Admin can see a list of all users
+5. Users can see All products, filter by category, search by keywords, sorted by Attributes
 
 ### CRUD Order (OrderFlow)
 
