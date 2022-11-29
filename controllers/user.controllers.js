@@ -14,16 +14,15 @@ const User = require("../models/User");
 const userController = {};
 
 userController.register = catchAsync(async (req, res, next) => {
-  let { name, email, password } = req.body;
+  let { name, email, password, role } = req.body;
   let user = await User.findOne({ email });
   if (user) {
     throw new AppError(409, "already registered", "login failed");
   }
   const salt = await bcrypt.genSalt(10);
   password = await bcrypt.hash(password, salt);
-  user = await User.create({ name, email, password });
-  const accessToken = user.generateToken();
-  return sendResponse(res, 200, true, { user, accessToken }, null, "success");
+  user = await User.create({ name, email, password, role });
+  return sendResponse(res, 200, true, user, null, "success");
 });
 
 userController.login = catchAsync(async (req, res, next) => {
