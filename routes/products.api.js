@@ -7,7 +7,10 @@ const {
   deleteProduct,
   addProduct,
 } = require("../controllers/product.controllers");
-const { loginRequired } = require("../middlewares/authentication");
+const {
+  loginRequired,
+  adminRequired,
+} = require("../middlewares/authentication");
 const { validate, checkObjectId } = require("../middlewares/validator");
 const router = express.Router();
 
@@ -15,10 +18,15 @@ router.get("/all", getAllProducts);
 
 router.get("/:productId", getDetails);
 
-router.put("/:productId/update", update);
+router.put("/:productId/update", loginRequired, adminRequired, update);
 
-router.delete("/:productId", deleteProduct);
+router.delete(
+  "/:productId/delete",
+  loginRequired,
+  adminRequired,
+  deleteProduct
+);
 
-router.post("/add", addProduct);
+router.post("/add", loginRequired, adminRequired, addProduct);
 
 module.exports = router;
