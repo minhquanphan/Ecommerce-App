@@ -1,6 +1,12 @@
 const { catchAsync, sendResponse, AppError } = require("../helpers/utils");
 const Product = require("../models/Product");
 
+// 1. Admin can add product ✅
+// 2. Admin can update product ✅
+// 3. Admin can delete product ✅
+// 4. Can see a detail of prodcut ✅
+// 5. Users can see All products, filter by brand, search by keywords ✅
+
 const productController = {};
 
 productController.getAllProducts = catchAsync(async (req, res, next) => {

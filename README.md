@@ -21,11 +21,11 @@ This include all common features of a ecommerce platform.
 
 ### CRUD product with admin access (ProductFlow)
 
-1. Admin can add product
-2. Admin can update product
-3. Admin can delete product
-4. Admin can see a list of all users
-5. Users can see All products, filter by category, search by keywords, sorted by Attributes
+1. Admin can add product ✅
+2. Admin can update product ✅
+3. Admin can delete product✅
+4. Can see details of product✅
+5. Users can see All products, filter by brand, search by keywords ✅
 
 ### CRUD Order (OrderFlow)
 
