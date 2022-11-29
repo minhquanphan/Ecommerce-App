@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { AppError } = require("../helpers/utils");
+const User = require("../models/User");
 const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 const authMiddleware = {};
@@ -28,6 +29,21 @@ authMiddleware.loginRequired = (req, res, next) => {
   }
 };
 
-authMiddleware.adminRequired = (req, res, next) => {};
+authMiddleware.adminRequired = async (req, res, next) => {
+  try {
+    const userId = req.userId;
+    const currentUser = await User.findById(userId);
+    const isAdmin = currentUser.role === "admin";
+
+    if (!isAdmin) {
+      throw new AppError(401, "Admin required");
+    }
+    req.isAdmin = isAdmin;
+
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports = authMiddleware;
