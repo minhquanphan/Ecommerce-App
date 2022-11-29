@@ -5,4 +5,8 @@ const router = express.Router();
 const userRouter = require("./users.api");
 router.use("/users", userRouter);
 
+/* GET product endpoints. */
+const productRouter = require("./products.api");
+router.use("/products", productRouter);
+
 module.exports = router;

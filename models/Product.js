@@ -10,9 +10,10 @@ const productSchema = Schema(
     price: { type: Number, required: true },
     countInStock: { type: Number, required: true },
     imageUrl: { type: String, required: true },
+    isDeleted: { type: Boolean, default: false },
   },
   { timestamp: true }
 );
 
-const Product = mongoose.model("Product", productSchema);
+const Product = mongoose.model("Products", productSchema);
 module.exports = Product;
