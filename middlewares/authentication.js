@@ -34,7 +34,7 @@ authMiddleware.adminRequired = async (req, res, next) => {
     const userId = req.userId;
     const currentUser = await User.findById(userId);
     const isAdmin = currentUser.role === "admin";
-
+    //check admin role
     if (!isAdmin) {
       throw new AppError(401, "Admin required");
     }
