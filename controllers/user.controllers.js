@@ -19,13 +19,13 @@ userController.register = catchAsync(async (req, res, next) => {
 
 userController.login = catchAsync(async (req, res, next) => {
   const { email, password } = req.body;
-  let user = await User.findOne({ email });
+  const user = await User.findOne({ email });
   if (!user) {
     throw new AppError(409, "Incorect credentials", "login failed");
   }
-  const isMatch = bcrypt.compare(user.password, password);
+  const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    throw new AppError(409, "Incorect password", "Try again");
+    throw new AppError(400, "Invalid password", "Login Error");
   }
   const accessToken = user.generateToken();
   return sendResponse(res, 200, true, { user, accessToken }, null, "Success");
@@ -53,10 +53,6 @@ userController.changePassword = catchAsync(async (req, res, next) => {
   let currentUser = await User.findById(currentUserId);
   if (!currentUser) {
     throw new AppError(404, "User not found", "Error");
-  }
-  const isMatch = bcrypt.compare(currentUser.password, password);
-  if (!isMatch) {
-    throw new AppError(409, "Incorect password", "Try again");
   }
   const salt = await bcrypt.genSalt(10);
   const newPassword = await bcrypt.hash(password, salt);

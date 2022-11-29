@@ -28,4 +28,6 @@ authMiddleware.loginRequired = (req, res, next) => {
   }
 };
 
+authMiddleware.adminRequired = (req, res, next) => {};
+
 module.exports = authMiddleware;
