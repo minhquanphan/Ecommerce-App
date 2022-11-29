@@ -1,5 +1,4 @@
 const express = require("express");
-const { param, body, header } = require("express-validator");
 const {
   getAllProducts,
   getDetails,
@@ -11,7 +10,6 @@ const {
   loginRequired,
   adminRequired,
 } = require("../middlewares/authentication");
-const { validate, checkObjectId } = require("../middlewares/validator");
 const router = express.Router();
 
 router.get("/all", getAllProducts);
