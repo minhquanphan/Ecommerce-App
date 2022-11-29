@@ -2,6 +2,15 @@ const bcrypt = require("bcryptjs/dist/bcrypt");
 const { catchAsync, sendResponse, AppError } = require("../helpers/utils");
 const User = require("../models/User");
 
+// 1. User can create account with email and password ✅
+// 2. User can login with email and password ✅
+// 3. Owner can update own account profile ✅
+// 4. Owner can see own account profile ✅
+// 5. Current user can see list of orders
+// 6. Users can change password ✅
+// 7. Users can checkout and pay for cart
+// 8. Users can top-up balance
+
 const userController = {};
 
 userController.register = catchAsync(async (req, res, next) => {
