@@ -12,7 +12,7 @@ const productSchema = Schema(
     imageUrl: { type: String, required: true },
     isDeleted: { type: Boolean, default: false },
   },
-  { timestamp: true }
+  { timestamp: true } //CreatedAt & UpdatedAt
 );
 
 const Product = mongoose.model("Products", productSchema);

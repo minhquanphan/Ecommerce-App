@@ -27,7 +27,7 @@ This include all common features of a ecommerce platform.
 4. Can see details of product✅
 5. Users can see All products, filter by brand, search by keywords ✅
 
-### CRUD Order (OrderFlow)
+### CRUD Cart (OrderFlow)
 
 1. Author can create order
 2. User can see order detail
