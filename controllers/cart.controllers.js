@@ -2,7 +2,6 @@
 // 2. User can see cart detail ✅
 // 3. Admin can see all cart ✅
 // 4. Users can Edit Cart, Delete Cart ✅
-// 5. Users can checkout and pay for cart ✅
 
 const { catchAsync, sendResponse, AppError } = require("../helpers/utils");
 const Cart = require("../models/Cart");

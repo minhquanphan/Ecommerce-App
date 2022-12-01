@@ -79,6 +79,7 @@ userController.paymentCart = catchAsync(async (req, res, next) => {
 
   let currentUser = await User.findById(currentUserId);
 
+  //find the order to pay
   let cartPending = await Cart.findOne({
     _id: cartId,
     author: currentUserId,
@@ -93,16 +94,27 @@ userController.paymentCart = catchAsync(async (req, res, next) => {
   let total = cartPending.total;
   let balance = currentUser.balance;
 
+  //check balance
   if (total > balance) {
     throw new AppError(403, "Balance not enough", "Top up now");
   }
 
+  //update new balance
   currentUser = await User.findByIdAndUpdate(
     { _id: currentUserId },
     { balance: balance - total }
   );
 
-  return sendResponse(res, 200, true, { cartPending }, null, "Success");
+  //update new order
+  cartPending = await Cart.findByIdAndUpdate(
+    {
+      _id: cartId,
+    },
+    { status: "paid" },
+    { new: true }
+  );
+
+  return sendResponse(res, 200, true, { cartPending }, null, "Payment Success");
 });
 
 module.exports = userController;

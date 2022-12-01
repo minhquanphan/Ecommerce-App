@@ -17,6 +17,7 @@ This include all common features of an E-commerce Platform.
 5. Current user can see list of orders
 6. Users can change password ✅
 7. Users can top-up balance
+8. Users can checkout and pay for cart ✅
 
 ### CRUD product with admin access (ProductFlow)
 

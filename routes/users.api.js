@@ -44,6 +44,6 @@ router.put(
   changePassword
 );
 
-router.get("/:cartId/payment", loginRequired, paymentCart);
+router.put("/:cartId/payment", loginRequired, paymentCart);
 
 module.exports = router;
