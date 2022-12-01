@@ -2,11 +2,11 @@
 
 ## Description
 
-A ecommerce platform web application built with MERN stack. This is the codebase for the MongoDB NodeJS and Express RESTful backend API.
+An e-commerce platform web application built with MERN stack. This is the codebase for the MongoDB NodeJS and Express RESTful backend API.
 
 ## Features
 
-This include all common features of a ecommerce platform.
+This include all common features of an E-commerce Platform.
 
 ### CRUD User authentication and managing account (UserFlow)
 
@@ -26,7 +26,7 @@ This include all common features of a ecommerce platform.
 4. Can see details of product ✅
 5. Users can see All products, filter by brand, search by keywords ✅
 
-### CRUD Cart (OrderFlow)
+### CRUD cart managing order process (OrderFlow)
 
 1. Author can create order ✅
 2. User can see order detail ✅

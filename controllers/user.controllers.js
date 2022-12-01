@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs/dist/bcrypt");
 const { catchAsync, sendResponse, AppError } = require("../helpers/utils");
+const Cart = require("../models/Cart");
 const User = require("../models/User");
 
 // 1. User can create account with email and password ✅
@@ -70,6 +71,38 @@ userController.changePassword = catchAsync(async (req, res, next) => {
     { new: true }
   );
   return sendResponse(res, 200, true, { currentUser }, null, "Success");
+});
+
+userController.paymentCart = catchAsync(async (req, res, next) => {
+  const { currentUserId } = req;
+  const { cartId } = req.params;
+
+  let currentUser = await User.findById(currentUserId);
+
+  let cartPending = await Cart.findOne({
+    _id: cartId,
+    author: currentUserId,
+    status: "pending",
+    isDeleted: false,
+  });
+
+  if (!cartPending) {
+    throw new AppError(402, "No pending order found", "error");
+  }
+
+  let total = cartPending.total;
+  let balance = currentUser.balance;
+
+  if (total > balance) {
+    throw new AppError(403, "Balance not enough", "Top up now");
+  }
+
+  currentUser = await User.findByIdAndUpdate(
+    { _id: currentUserId },
+    { balance: balance - total }
+  );
+
+  return sendResponse(res, 200, true, { cartPending }, null, "Success");
 });
 
 module.exports = userController;

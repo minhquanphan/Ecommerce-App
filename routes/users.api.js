@@ -5,6 +5,7 @@ const {
   login,
   updateProfile,
   changePassword,
+  paymentCart,
 } = require("../controllers/user.controllers");
 const { loginRequired } = require("../middlewares/authentication");
 const { validate, checkObjectId } = require("../middlewares/validator");
@@ -42,5 +43,7 @@ router.put(
   validate([body("password", "Invalid password").exists().notEmpty()]),
   changePassword
 );
+
+router.get("/:cartId/payment", loginRequired, paymentCart);
 
 module.exports = router;
