@@ -7,9 +7,9 @@ const User = require("../models/User");
 // 2. User can login with email and password ✅
 // 3. Owner can update own account profile ✅
 // 4. Owner can see own account profile ✅
-// 5. Current user can see list of orders
+// 5. Current user can see list of orders ✅
 // 6. Users can change password ✅
-// 7. Users can checkout and pay for cart
+// 7. Users can checkout and pay for cart✅
 // 8. Users can top-up balance
 
 const userController = {};
@@ -71,6 +71,26 @@ userController.changePassword = catchAsync(async (req, res, next) => {
     { new: true }
   );
   return sendResponse(res, 200, true, { currentUser }, null, "Success");
+});
+
+userController.myCart = catchAsync(async (req, res, next) => {
+  const { currentUserId } = req;
+  let { page, limit } = req.query;
+  page = parseInt(page) || 1;
+  limit = parseInt(limit) || 10;
+  const count = await Cart.countDocuments({ isDeleted: false });
+  const offset = limit * (page - 1);
+  const totalPages = Math.ceil(count / limit);
+  const cart = await Cart.find({ author: currentUserId, isDeleted: false })
+    .sort({ createdAt: -1 })
+    .skip(offset)
+    .limit(limit);
+  return sendResponse(res, 200, true, { cart, totalPages }, null, "Success");
+});
+
+userController.topUpBalance = catchAsync(async (req, res, next) => {
+  const { currentUserId } = req;
+  const { topUpAmount } = req.body;
 });
 
 userController.paymentCart = catchAsync(async (req, res, next) => {

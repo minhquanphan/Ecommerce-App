@@ -6,6 +6,7 @@ const {
   updateProfile,
   changePassword,
   paymentCart,
+  myCart,
 } = require("../controllers/user.controllers");
 const { loginRequired } = require("../middlewares/authentication");
 const { validate, checkObjectId } = require("../middlewares/validator");
@@ -45,5 +46,7 @@ router.put(
 );
 
 router.put("/:cartId/payment", loginRequired, paymentCart);
+
+router.get("/cart", loginRequired, myCart);
 
 module.exports = router;
