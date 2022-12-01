@@ -22,7 +22,7 @@ userController.register = catchAsync(async (req, res, next) => {
   const salt = await bcrypt.genSalt(10);
   password = await bcrypt.hash(password, salt);
   user = await User.create({ name, email, password, role });
-  return sendResponse(res, 200, true, user, null, "success");
+  return sendResponse(res, 200, true, { user }, null, "success");
 });
 
 userController.login = catchAsync(async (req, res, next) => {
@@ -52,7 +52,7 @@ userController.updateProfile = catchAsync(async (req, res, next) => {
     }
   });
   await currentUser.save();
-  return sendResponse(res, 200, true, currentUser, null, "Success");
+  return sendResponse(res, 200, true, { currentUser }, null, "Success");
 });
 
 userController.changePassword = catchAsync(async (req, res, next) => {
@@ -69,7 +69,7 @@ userController.changePassword = catchAsync(async (req, res, next) => {
     { password: newPassword },
     { new: true }
   );
-  return sendResponse(res, 200, true, currentUser, null, "Success");
+  return sendResponse(res, 200, true, { currentUser }, null, "Success");
 });
 
 module.exports = userController;

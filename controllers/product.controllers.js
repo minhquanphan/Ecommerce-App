@@ -47,7 +47,7 @@ productController.getDetails = catchAsync(async (req, res, next) => {
   if (!product) {
     throw new AppError(404, "Product not found", "Product not found");
   }
-  return sendResponse(res, 200, true, product, null, "success");
+  return sendResponse(res, 200, true, { product }, null, "success");
 });
 
 productController.update = catchAsync(async (req, res, next) => {
@@ -84,7 +84,7 @@ productController.deleteProduct = catchAsync(async (req, res, next) => {
   if (!product) {
     throw new AppError(404, "Product not found", "error");
   }
-  return sendResponse(res, 200, true, product, null, "Success");
+  return sendResponse(res, 200, true, { product }, null, "Success");
 });
 
 productController.addProduct = catchAsync(async (req, res, next) => {
@@ -107,6 +107,6 @@ productController.addProduct = catchAsync(async (req, res, next) => {
     countInStock,
     imageUrl,
   });
-  return sendResponse(res, 200, true, product, null, "Success");
+  return sendResponse(res, 200, true, { product }, null, "Success");
 });
 module.exports = productController;
