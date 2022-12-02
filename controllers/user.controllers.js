@@ -9,8 +9,8 @@ const User = require("../models/User");
 // 4. Owner can see own account profile ✅
 // 5. Current user can see list of orders ✅
 // 6. Users can change password ✅
-// 7. Users can checkout and pay for cart✅
-// 8. Users can top-up balance
+// 7. Users can checkout and pay for cart ✅
+// 8. Users can top-up balance ✅
 
 const userController = {};
 
@@ -85,12 +85,31 @@ userController.myCart = catchAsync(async (req, res, next) => {
     .sort({ createdAt: -1 })
     .skip(offset)
     .limit(limit);
+  if (!cart) {
+    throw new AppError(404, "Cart not found");
+  }
   return sendResponse(res, 200, true, { cart, totalPages }, null, "Success");
 });
 
 userController.topUpBalance = catchAsync(async (req, res, next) => {
   const { currentUserId } = req;
-  const { topUpAmount } = req.body;
+  const { balanceAmount } = req.body;
+  let user = await User.findById(currentUserId);
+  if (!user) {
+    throw new AppError(404, "User not found", "error");
+  }
+
+  const previousBalance = user.balance;
+
+  user = await User.findByIdAndUpdate(
+    { _id: currentUserId },
+    {
+      balance: previousBalance + balanceAmount,
+    },
+    { new: true }
+  );
+
+  return sendResponse(res, 200, true, { user }, null, "Successfull top up");
 });
 
 userController.paymentCart = catchAsync(async (req, res, next) => {
