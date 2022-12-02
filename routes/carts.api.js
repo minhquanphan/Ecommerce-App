@@ -4,6 +4,7 @@ const {
   detail,
   update,
   deleteCart,
+  getAllCarts,
 } = require("../controllers/cart.controllers");
 const {
   loginRequired,
@@ -13,10 +14,12 @@ const router = express.Router();
 
 router.post("/create", loginRequired, create);
 
-router.get("/:cartId", loginRequired, detail);
+router.get("/:cartId/detail", loginRequired, detail);
 
 router.put("/:cartId/update", loginRequired, update);
 
 router.delete("/:cartId/delete", loginRequired, deleteCart);
+
+router.get("/all", loginRequired, getAllCarts);
 
 module.exports = router;

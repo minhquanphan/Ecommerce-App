@@ -6,6 +6,7 @@
 const { catchAsync, sendResponse, AppError } = require("../helpers/utils");
 const Cart = require("../models/Cart");
 const Product = require("../models/Product");
+const User = require("../models/User");
 
 const cartController = {};
 
@@ -36,7 +37,6 @@ cartController.detail = catchAsync(async (req, res, next) => {
 
   const cart = await Cart.findOne({
     cartId,
-    isDeleted: false,
   }).populate("author");
 
   if (!cart) {
@@ -79,7 +79,7 @@ cartController.update = catchAsync(async (req, res, next) => {
     throw new AppError(401, "Cart not exist", "error");
   }
 
-  return sendResponse(res, 200, true, { cart }, null, "Success");
+  return sendResponse(res, 200, true, { cart }, null, "Successfully updated");
 });
 
 cartController.deleteCart = catchAsync(async (req, res, next) => {
@@ -99,4 +99,32 @@ cartController.deleteCart = catchAsync(async (req, res, next) => {
   return sendResponse(res, 200, true, { cart }, null, "Success");
 });
 
+cartController.getAllCarts = catchAsync(async (req, res, next) => {
+  const { currentUserId } = req;
+  const currentUser = await User.findById(currentUserId);
+  if (currentUser.role !== "admin") {
+    throw new AppError(401, "Only admin able to check other user Order detail");
+  }
+  let { page, limit } = req.query;
+  page = parseInt(page) || 1;
+  limit = parseInt(limit) || 20;
+  const count = await Cart.count({ isDeleted: false });
+  const offset = limit * (page - 1);
+  const totalPages = Math.ceil(count / limit);
+
+  let cartList = await Cart.find({ isDeleted: false })
+    .sort({ createdAt: -1 })
+    .skip(offset)
+    .limit(limit)
+    .populate("author");
+
+  return sendResponse(
+    res,
+    200,
+    true,
+    { cartList, totalPages },
+    null,
+    "Successful get all carts"
+  );
+});
 module.exports = cartController;
