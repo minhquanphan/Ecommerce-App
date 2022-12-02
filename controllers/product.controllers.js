@@ -71,7 +71,7 @@ productController.update = catchAsync(async (req, res, next) => {
     }
   });
   await product.save();
-  return sendResponse(res, 200, true, product, null, "Success");
+  return sendResponse(res, 200, true, { product }, null, "Success");
 });
 
 productController.deleteProduct = catchAsync(async (req, res, next) => {

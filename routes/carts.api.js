@@ -20,6 +20,6 @@ router.put("/:cartId/update", loginRequired, update);
 
 router.delete("/:cartId/delete", loginRequired, deleteCart);
 
-router.get("/all", loginRequired, getAllCarts);
+router.get("/all", loginRequired, adminRequired, getAllCarts);
 
 module.exports = router;

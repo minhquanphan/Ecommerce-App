@@ -100,11 +100,6 @@ cartController.deleteCart = catchAsync(async (req, res, next) => {
 });
 
 cartController.getAllCarts = catchAsync(async (req, res, next) => {
-  const { currentUserId } = req;
-  const currentUser = await User.findById(currentUserId);
-  if (currentUser.role !== "admin") {
-    throw new AppError(401, "Only admin able to check other user Order detail");
-  }
   let { page, limit } = req.query;
   page = parseInt(page) || 1;
   limit = parseInt(limit) || 20;
