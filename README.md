@@ -16,7 +16,7 @@ This include all common features of an E-commerce Platform.
 4. Owner can see own account profile ✅
 5. Current user can see list of orders
 6. Users can change password ✅
-7. Users can top-up balance
+7. Users can top-up balance ✅
 8. Users can checkout and pay for cart ✅
 
 ### CRUD product with admin access (ProductFlow)
@@ -30,7 +30,7 @@ This include all common features of an E-commerce Platform.
 ### CRUD cart managing order process (OrderFlow)
 
 1. Author can create order ✅
-2. User can see order detail ✅
+2. Get detail of an order by its ID ✅
 3. Admin can see all order ✅
 4. Users can Edit Cart, Delete Cart ✅
 

@@ -1,5 +1,5 @@
 // 1. User can create cart ✅
-// 2. User can see cart detail ✅
+// 2. Get detail of an order by its ID ✅
 // 3. Admin can see all cart ✅
 // 4. Users can Edit Cart, Delete Cart ✅
 
@@ -50,30 +50,6 @@ cartController.detail = catchAsync(async (req, res, next) => {
     { cart },
     null,
     "Get detail order success"
-  );
-});
-
-// not done yet
-cartController.allCart = catchAsync(async (req, res, next) => {
-  let { page, limit } = req.query;
-  page = parseInt(page) || 1;
-  limit = parseInt(limit) || 10;
-  const count = await Cart.countDocuments({ isDeleted: false });
-  const offset = limit * (page - 1);
-  const totalPages = Math.ceil(count / limit);
-  let cartList = await Cart.find({ isDeleted: false })
-    .sort({ createdAt: -1 })
-    .skip(offset)
-    .limit(limit)
-    .populate("author");
-
-  return sendResponse(
-    res,
-    200,
-    true,
-    { cartList, totalPages },
-    null,
-    "Successful get cart list"
   );
 });
 
