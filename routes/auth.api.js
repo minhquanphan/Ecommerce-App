@@ -1,0 +1,13 @@
+const express = require("express");
+const router = express.Router();
+
+router.post(
+  "/login",
+  validate([
+    body("email", "Invalid email").exists().isEmail(),
+    body("password", "Invalid password").exists().notEmpty(),
+  ]),
+  login
+);
+
+module.exports = router;

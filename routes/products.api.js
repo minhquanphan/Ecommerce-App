@@ -12,7 +12,7 @@ const {
 } = require("../middlewares/authentication");
 const router = express.Router();
 
-router.get("/all", getAllProducts);
+router.get("/product", getAllProducts);
 
 router.get("/:productId", getDetails);
 
