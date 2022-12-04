@@ -1,5 +1,5 @@
 const express = require("express");
-const { param, body, header } = require("express-validator");
+const { param, body } = require("express-validator");
 const {
   register,
   login,
@@ -9,7 +9,10 @@ const {
   myCart,
   topUpBalance,
 } = require("../controllers/user.controllers");
-const { loginRequired } = require("../middlewares/authentication");
+const {
+  loginRequired,
+  adminRequired,
+} = require("../middlewares/authentication");
 const { validate, checkObjectId } = require("../middlewares/validator");
 const router = express.Router();
 
@@ -46,10 +49,21 @@ router.put(
   changePassword
 );
 
-router.put("/:cartId/payment", loginRequired, paymentCart);
+router.put(
+  "/:cartId/payment",
+  loginRequired,
+  validate([param("cartId").exists().isString().custom(checkObjectId)]),
+  paymentCart
+);
 
 router.get("/cart", loginRequired, myCart);
 
-router.put("/topup", loginRequired, topUpBalance);
+router.put(
+  "/topup",
+  loginRequired,
+  validate([body("balanceAmount").exists()]),
+  adminRequired,
+  topUpBalance
+);
 
 module.exports = router;

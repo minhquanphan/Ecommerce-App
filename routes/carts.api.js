@@ -1,4 +1,5 @@
 const express = require("express");
+const { param, body } = require("express-validator");
 const {
   create,
   detail,
@@ -10,15 +11,39 @@ const {
   loginRequired,
   adminRequired,
 } = require("../middlewares/authentication");
+const { validate, checkObjectId } = require("../middlewares/validator");
 const router = express.Router();
 
-router.post("/create", loginRequired, create);
+router.post(
+  "/create",
+  loginRequired,
+  validate([body("products").exists()]),
+  create
+);
 
-router.get("/:cartId/detail", loginRequired, detail);
+router.get(
+  "/:cartId/detail",
+  loginRequired,
+  validate([param("cartId").exists().isString().custom(checkObjectId)]),
+  detail
+);
 
-router.put("/:cartId/update", loginRequired, update);
+router.put(
+  "/:cartId/update",
+  loginRequired,
+  validate([
+    param("cartId").exists().isString().custom(checkObjectId),
+    body("products").exists(),
+  ]),
+  update
+);
 
-router.delete("/:cartId/delete", loginRequired, deleteCart);
+router.delete(
+  "/:cartId/delete",
+  loginRequired,
+  validate([param("cartId").exists().isString().custom(checkObjectId)]),
+  deleteCart
+);
 
 router.get("/allCart", loginRequired, adminRequired, getAllCarts);
 
