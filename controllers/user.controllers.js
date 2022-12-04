@@ -86,7 +86,7 @@ userController.myCart = catchAsync(async (req, res, next) => {
     .skip(offset)
     .limit(limit);
   if (!cart) {
-    throw new AppError(404, "Cart not found");
+    throw new AppError(401, "Cart not found");
   }
   return sendResponse(res, 200, true, { cart, totalPages }, null, "Success");
 });
@@ -127,7 +127,7 @@ userController.paymentCart = catchAsync(async (req, res, next) => {
   });
 
   if (!cartPending) {
-    throw new AppError(402, "No pending order found", "error");
+    throw new AppError(401, "No pending order found", "error");
   }
 
   let total = cartPending.total;

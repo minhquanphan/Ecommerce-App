@@ -29,7 +29,7 @@ cartController.create = catchAsync(async (req, res, next) => {
         throw new AppError(400, "Not enough count for the product");
       }
     } else {
-      throw new AppError(404, "Product not found", "error");
+      throw new AppError(404, "Product not found", "Error");
     }
     total += product.price * products[i].qty;
   }
@@ -51,7 +51,7 @@ cartController.detail = catchAsync(async (req, res, next) => {
   }).populate("author");
 
   if (!cart) {
-    throw new AppError(401, "Cart not exist", "error");
+    throw new AppError(401, "Cart not exist", "Error");
   }
 
   return sendResponse(
@@ -84,7 +84,7 @@ cartController.update = catchAsync(async (req, res, next) => {
         throw new AppError(400, "Not enough count for the product");
       }
     } else {
-      throw new AppError(404, "Product not found", "error");
+      throw new AppError(404, "Product not found", "Error");
     }
     total += product.price * products[i].qty;
   }
@@ -99,7 +99,7 @@ cartController.update = catchAsync(async (req, res, next) => {
   );
 
   if (!cart) {
-    throw new AppError(401, "Cart not exist", "error");
+    throw new AppError(401, "Cart not exist", "Error");
   }
 
   return sendResponse(res, 200, true, { cart }, null, "Successfully updated");
@@ -116,7 +116,7 @@ cartController.deleteCart = catchAsync(async (req, res, next) => {
   );
 
   if (!cart) {
-    throw new AppError(401, "Cart not exist", "error");
+    throw new AppError(401, "Cart not exist", "Error");
   }
 
   return sendResponse(res, 200, true, { cart }, null, "Success");
