@@ -17,7 +17,7 @@ const router = express.Router();
 router.post(
   "/create",
   loginRequired,
-  validate([body("products").exists()]),
+  validate([body("products").exists().notEmpty()]),
   create
 );
 
@@ -33,7 +33,7 @@ router.put(
   loginRequired,
   validate([
     param("cartId").exists().isString().custom(checkObjectId),
-    body("products").exists(),
+    body("products").exists().notEmpty(),
   ]),
   update
 );

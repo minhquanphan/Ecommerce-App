@@ -45,7 +45,7 @@ router.put(
 router.put(
   "/password",
   loginRequired,
-  validate([body("password", "Invalid password").exists().notEmpty()]),
+  validate([body("password").exists().notEmpty()]),
   changePassword
 );
 
@@ -61,7 +61,7 @@ router.get("/cart", loginRequired, myCart);
 router.put(
   "/topup",
   loginRequired,
-  validate([body("balanceAmount").exists()]),
+  validate([body("balanceAmount").exists().notEmpty()]),
   adminRequired,
   topUpBalance
 );
