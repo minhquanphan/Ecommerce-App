@@ -11,7 +11,7 @@ const cartSchema = Schema(
           ref: "Products",
           required: true,
         },
-        qty: { type: Number, required: true },
+        qty: { type: Number, required: true, default: 1 },
       },
     ],
     status: { type: String, emum: ["pending", "paid"], default: "pending" },
