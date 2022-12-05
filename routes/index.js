@@ -13,7 +13,12 @@ router.use("/products", productRouter);
 const cartRouter = require("./carts.api");
 router.use("/carts", cartRouter);
 
+/* GET review endpoints. */
 const reviewRouter = require("./reviews.api");
 router.use("/reviews", reviewRouter);
+
+/* GET reaction endpoints. */
+const reactionRouter = require("./reactions.api");
+router.use("/reactions", reactionRouter);
 
 module.exports = router;

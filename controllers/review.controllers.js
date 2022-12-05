@@ -62,4 +62,33 @@ reviewController.remove = catchAsync(async (req, res, next) => {
   return sendResponse(res, 200, true, {}, null, "Success");
 });
 
+reviewController.allReviewsByProduct = catchAsync(async (req, res, next) => {
+  const { productId } = req.params;
+  const product = await Product.findById(productId);
+  if (!product) {
+    throw new AppError(404, "Product not found", "Error");
+  }
+  let { page, limit } = req.query;
+  page = parseInt(page) || 1;
+  limit = parseInt(limit) || 15;
+  const count = await Review.count({ isDeleted: false });
+  const offset = limit * (page - 1);
+  const totalPages = Math.ceil(count / limit);
+  const productReviews = await Review.find({
+    product: productId,
+    isDeleted: false,
+  })
+    .sort({ createdAt: -1 })
+    .skip(offset)
+    .limit(limit);
+  return sendResponse(
+    res,
+    200,
+    true,
+    { productReviews, totalPages },
+    null,
+    "Success"
+  );
+});
+
 module.exports = reviewController;

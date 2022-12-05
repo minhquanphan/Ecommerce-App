@@ -4,6 +4,7 @@ const {
   createReview,
   edit,
   remove,
+  allReviewsByProduct,
 } = require("../controllers/review.controllers");
 const { loginRequired } = require("../middlewares/authentication");
 const { checkObjectId, validate } = require("../middlewares/validator");
@@ -35,6 +36,12 @@ router.delete(
   loginRequired,
   validate([param("reviewId").exists().isString().custom(checkObjectId)]),
   remove
+);
+
+router.get(
+  "/:productId/all",
+  validate([param("productId").exists().isString().custom(checkObjectId)]),
+  allReviewsByProduct
 );
 
 module.exports = router;
