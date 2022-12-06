@@ -8,7 +8,7 @@ const {
 } = require("../controllers/review.controllers");
 const { loginRequired } = require("../middlewares/authentication");
 const { checkObjectId, validate } = require("../middlewares/validator");
-const router = require("./carts.api");
+const router = express.Router();
 
 router.post(
   "/create/review",
