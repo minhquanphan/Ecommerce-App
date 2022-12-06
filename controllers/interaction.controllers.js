@@ -13,7 +13,7 @@ interactionController.emoji = catchAsync(async (req, res, next) => {
   const collectionName = mongoose.model(targetType);
   let target = await collectionName.findOne({ _id: targetId });
   if (!target) {
-    throw new AppError(404, "Review not found", "Create reactions error");
+    throw new AppError(404, "Not found", "Create reactions error");
   }
 
   let reaction = await Interaction.findOne({
