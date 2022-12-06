@@ -17,4 +17,8 @@ router.use("/carts", cartRouter);
 const reviewRouter = require("./reviews.api");
 router.use("/reviews", reviewRouter);
 
+/* GET interaction endpoints. */
+const interactionRouter = require("./interactions.api");
+router.use("/interactions", interactionRouter);
+
 module.exports = router;

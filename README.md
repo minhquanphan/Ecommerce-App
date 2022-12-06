@@ -34,12 +34,14 @@ This include all common features of an E-commerce Platform.
 3. Admin can see all order ✅
 4. Users can Edit Cart, Delete Cart ✅
 
-### CRUD review product (ReviewFlow)
+### CRUD review product & reaction reviews (InteractionFlow)
 
 1. Author can create review ✅
 2. Get detail of an review by its ID ✅
 3. Users can see all review of product ✅
 4. Users can Edit Review, Delete Review ✅
+5. User can make a reaction (like, dislike) to each other review ✅
+6. User can make see all reaction (like, dislike, author) to each other review ✅
 
 ## Project setup
 
