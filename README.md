@@ -41,7 +41,7 @@ This include all common features of an E-commerce Platform.
 3. Users can see all review of product ✅
 4. Users can Edit Review, Delete Review ✅
 5. User can make a reaction (like, dislike) to each other review ✅
-6. User can make see all reaction (like, dislike, author) to each other review ✅
+6. User see all reaction (like, dislike) each review ✅
 
 ## Project setup
 

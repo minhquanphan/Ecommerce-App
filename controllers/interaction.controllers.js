@@ -1,5 +1,5 @@
 // 5. User can make a reaction (like, dislike) to each other review ✅
-// 6. User can make see all reaction (like, dislike, author) to each other review ✅
+// 6. User see all reaction (like, dislike) each review ✅
 
 const mongoose = require("mongoose");
 const { catchAsync, sendResponse, AppError } = require("../helpers/utils");
