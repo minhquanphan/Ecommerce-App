@@ -26,5 +26,5 @@ const createDatabase = async () => {
       imageUrl: data[i]["Image URL"],
     });
   }
-  console.log("done");
+  console.log("Done");
 };
