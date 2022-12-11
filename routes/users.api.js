@@ -2,7 +2,6 @@ const express = require("express");
 const { param, body } = require("express-validator");
 const {
   register,
-  login,
   updateProfile,
   changePassword,
   paymentCart,
@@ -24,15 +23,6 @@ router.post(
     body("password", "Invalid password").exists().notEmpty(),
   ]),
   register
-);
-
-router.post(
-  "/login",
-  validate([
-    body("email", "Invalid email").exists().isEmail(),
-    body("password", "Invalid password").exists().notEmpty(),
-  ]),
-  login
 );
 
 router.put(

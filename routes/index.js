@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
+/* GET auth endpoints. */
+const authRouter = require("./auth.api");
+router.use("/auth", authRouter);
+
 /* GET user endpoints. */
 const userRouter = require("./users.api");
 router.use("/users", userRouter);

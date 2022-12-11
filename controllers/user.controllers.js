@@ -4,13 +4,12 @@ const Cart = require("../models/Cart");
 const User = require("../models/User");
 
 // 1. User can create account with email and password ✅
-// 2. User can login with email and password ✅
-// 3. Owner can update own account profile ✅
-// 4. Owner can see own account profile ✅
-// 5. Current user can see list of orders ✅
-// 6. Users can change password ✅
-// 7. Users can checkout and pay for cart ✅
-// 8. Users can top-up balance ✅
+// 2. Owner can update own account profile ✅
+// 3. Owner can see own account profile ✅
+// 4. Current user can see list of orders ✅
+// 5. Users can change password ✅
+// 6. Users can checkout and pay for cart ✅
+// 7. Users can top-up balance ✅
 
 const userController = {};
 
@@ -24,20 +23,6 @@ userController.register = catchAsync(async (req, res, next) => {
   password = await bcrypt.hash(password, salt);
   user = await User.create({ name, email, password, role });
   return sendResponse(res, 200, true, { user }, null, "success");
-});
-
-userController.login = catchAsync(async (req, res, next) => {
-  const { email, password } = req.body;
-  const user = await User.findOne({ email });
-  if (!user) {
-    throw new AppError(409, "Incorect credentials", "login failed");
-  }
-  const isMatch = await bcrypt.compare(password, user.password);
-  if (!isMatch) {
-    throw new AppError(400, "Invalid password", "Login Error");
-  }
-  const accessToken = user.generateToken();
-  return sendResponse(res, 200, true, { user, accessToken }, null, "Success");
 });
 
 userController.updateProfile = catchAsync(async (req, res, next) => {
