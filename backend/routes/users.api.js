@@ -7,6 +7,7 @@ const {
   paymentCart,
   myCart,
   topUpBalance,
+  profile,
 } = require("../controllers/user.controllers");
 const {
   loginRequired,
@@ -24,6 +25,8 @@ router.post(
   ]),
   register
 );
+
+router.get("/me", loginRequired, profile);
 
 router.put(
   "/profile",
