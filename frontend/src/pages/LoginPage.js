@@ -49,7 +49,7 @@ function LoginPage() {
   } = methods;
 
   const onSubmit = async (data) => {
-    const from = location.state?.from?.pathname || "/";
+    const from = location.state?.from?.pathname || "/"; //path location the user wants to naviage
     let { email, password } = data;
 
     try {
