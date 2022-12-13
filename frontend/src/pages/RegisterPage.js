@@ -106,7 +106,7 @@ function RegisterPage() {
           />
 
           <FTextField
-            name="confirm password"
+            name="passwordConfirmation"
             label="Confirm Password"
             type={showPasswordConfirmation ? "text" : "password"}
             InputProps={{
