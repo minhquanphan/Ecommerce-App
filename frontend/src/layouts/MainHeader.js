@@ -114,7 +114,7 @@ function MainHeader() {
               mr: 2,
               display: { xs: "none", md: "flex" },
               fontFamily: "monospace",
-              fontWeight: 700,
+              fontWeight: "bold",
               letterSpacing: ".3rem",
               color: "inherit",
               textDecoration: "none",

@@ -112,6 +112,9 @@ function DetailPage() {
 
                         <Divider sx={{ borderStyle: "dashed" }} />
                         <Box>
+                          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                            The Scoop
+                          </Typography>
                           <ReactMarkdown
                             rehypePlugins={[rehypeRaw]}
                             children={product.description}
@@ -119,6 +122,9 @@ function DetailPage() {
                         </Box>
                         <Divider sx={{ borderStyle: "dashed" }} />
                         <Box>
+                          <Typography variant="h6" sx={{ fontWeight: "bold" }}>
+                            Fragrance Notes
+                          </Typography>
                           <ReactMarkdown
                             rehypePlugins={[rehypeRaw]}
                             children={product.notes}
