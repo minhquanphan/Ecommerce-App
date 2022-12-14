@@ -116,7 +116,7 @@ function MainHeader() {
             component="div"
             sx={{
               mr: 2,
-              display: { xs: "none", md: "flex" },
+              display: { xs: "flex", md: "flex" },
               fontFamily: "monospace",
               fontWeight: "bold",
               letterSpacing: ".3rem",
