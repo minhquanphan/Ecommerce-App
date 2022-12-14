@@ -57,10 +57,14 @@ function MainHeader() {
       onClose={handleMenuClose}
     >
       <Box sx={{ my: 1.5, px: 2.5 }}>
-        <Typography variant="subtitle2" noWrap>
+        <Typography variant="subtitle2" nowrap="true">
           {user?.name}
         </Typography>
-        <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
+        <Typography
+          variant="body2"
+          sx={{ color: "text.secondary" }}
+          nowrap="true"
+        >
           {user?.email}
         </Typography>
       </Box>
@@ -108,7 +112,7 @@ function MainHeader() {
           </IconButton>
           <Typography
             variant="h6"
-            noWrap
+            nowrap="true"
             component="div"
             sx={{
               mr: 2,
@@ -125,7 +129,7 @@ function MainHeader() {
 
           <Button
             size="large"
-            noWrap
+            nowrap="true"
             onClick={handleMenuClose}
             to="/"
             component={RouterLink}
@@ -136,7 +140,7 @@ function MainHeader() {
 
           <Button
             size="large"
-            noWrap
+            nowrap="true"
             onClick={handleMenuClose}
             to="/product"
             component={RouterLink}
