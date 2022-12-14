@@ -102,11 +102,6 @@ function applyFilter(products, filters) {
   }
 
   // FILTER PRODUCTS
-  if (filters.gender.length > 0) {
-    filteredProducts = products.filter((product) =>
-      filters.gender.includes(product.gender)
-    );
-  }
   if (filters.category !== "All") {
     filteredProducts = products.filter(
       (product) => product.category === filters.category

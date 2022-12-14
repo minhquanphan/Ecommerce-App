@@ -1,5 +1,5 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
-import { FMultiCheckbox, FRadioGroup } from "./form";
+import { FRadioGroup } from "./form";
 import ClearAllIcon from "@mui/icons-material/ClearAll";
 
 export const SORT_BY_OPTIONS = [
