@@ -10,11 +10,11 @@ import { fCurrency } from "../utils/numberFormat";
 function ProductCard({ product }) {
   const navigate = useNavigate();
   return (
-    <Card onClick={() => navigate(`/product/${product.id}`)}>
+    <Card onClick={() => navigate(`/product/${product._id}`)}>
       <CardActionArea>
         <CardMedia
           component="img"
-          height="200"
+          height="fix"
           image={product.imageUrl}
           alt={product.name}
         />
