@@ -8,7 +8,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 
 import Logo from "../components/Logo";
-import { Avatar, Divider } from "@mui/material";
+import { Avatar, Button, Divider } from "@mui/material";
 import useAuth from "../hooks/useAuth";
 import { useNavigate, Link as RouterLink } from "react-router-dom";
 
@@ -73,7 +73,7 @@ function MainHeader() {
         component={RouterLink}
         sx={{ mx: 1 }}
       >
-        My Profile
+        My Purchase
       </MenuItem>
 
       <MenuItem
@@ -94,7 +94,7 @@ function MainHeader() {
   );
 
   return (
-    <Box sx={{ mb: 3 }}>
+    <Box sx={{ mb: 1 }}>
       <AppBar position="static" color="transparent">
         <Toolbar>
           <IconButton
@@ -110,17 +110,47 @@ function MainHeader() {
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 700,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
           >
-            EcommercePlatform
+            Ecommerce
           </Typography>
+
+          <Button
+            size="large"
+            noWrap
+            onClick={handleMenuClose}
+            to="/"
+            component={RouterLink}
+            sx={{ my: 2, color: "inherit", display: "block" }}
+          >
+            Home
+          </Button>
+
+          <Button
+            size="large"
+            noWrap
+            onClick={handleMenuClose}
+            to="/product"
+            component={RouterLink}
+            sx={{ my: 2, color: "inherit", display: "block" }}
+          >
+            Products
+          </Button>
 
           <Box sx={{ flexGrow: 1 }} />
           <Box>
             <Avatar
               onClick={handleProfileMenuOpen}
               src={user?.avatarUrl}
-              alt={user?.name}
+              alt={user?.username}
               sx={{ width: 38, height: 38 }}
             />
           </Box>

@@ -9,6 +9,7 @@ import NotFoundPage from "../pages/NotFoundPage";
 import AccountPage from "../pages/AccountPage";
 import ProductPage from "../pages/ProductPage";
 import AuthRequire from "./AuthRequire";
+import DetailPage from "../pages/DetailPage";
 
 function Router() {
   return (
@@ -24,6 +25,7 @@ function Router() {
         <Route index element={<HomePage />} />
         <Route path="account" element={<AccountPage />} />
         <Route path="product" element={<ProductPage />} />
+        <Route path="product/:id" element={<DetailPage />} />
       </Route>
 
       <Route element={<BlankLayout />}>
