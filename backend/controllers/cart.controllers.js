@@ -16,21 +16,21 @@ cartController.create = catchAsync(async (req, res, next) => {
 
   for (let i = 0; i < products.length; i++) {
     let product = await Product.findById(products[i].product);
-    if (product) {
-      let productInStock = product.countInStock; // get product count in stock
-      if (productInStock >= products[i].qty) {
-        productInStock = productInStock - products[i].qty;
-        let updatedProduct = await Product.findByIdAndUpdate(
-          products[i].product,
-          { countInStock: productInStock },
-          { new: true }
-        );
-      } else {
-        throw new AppError(400, "Not enough count for the product");
-      }
-    } else {
-      throw new AppError(404, "Product not found", "Error");
-    }
+    // if (product) {
+    //   let productInStock = product.countInStock; // get product count in stock
+    //   if (productInStock >= products[i].qty) {
+    //     productInStock = productInStock - products[i].qty;
+    //     let updatedProduct = await Product.findByIdAndUpdate(
+    //       products[i].product,
+    //       { countInStock: productInStock },
+    //       { new: true }
+    //     );
+    //   } else {
+    //     throw new AppError(400, "Not enough count for the product");
+    //   }
+    // } else {
+    //   throw new AppError(404, "Product not found", "Error");
+    // }
     total += product.price * products[i].qty;
   }
 
