@@ -7,8 +7,9 @@ import LoginPage from "../pages/LoginPage";
 import RegisterPage from "../pages/RegisterPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import AccountPage from "../pages/AccountPage";
+import ProductPage from "../pages/ProductPage";
 import AuthRequire from "./AuthRequire";
-import UserProfilePage from "../pages/UserProfilePage";
+import DetailPage from "../pages/DetailPage";
 
 function Router() {
   return (
@@ -23,7 +24,8 @@ function Router() {
       >
         <Route index element={<HomePage />} />
         <Route path="account" element={<AccountPage />} />
-        <Route path="user/:userId" element={<UserProfilePage />} />
+        <Route path="product" element={<ProductPage />} />
+        <Route path="product/:id" element={<DetailPage />} />
       </Route>
 
       <Route element={<BlankLayout />}>
