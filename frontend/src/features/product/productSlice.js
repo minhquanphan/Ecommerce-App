@@ -8,7 +8,9 @@ const initialState = {
 const slice = createSlice({
   name: "product",
   initialState,
-  reducers: {},
+  reducers: {
+    startLoading: true,
+  },
 });
 
 export default slice.reducer;
