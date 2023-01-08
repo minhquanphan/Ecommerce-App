@@ -5,7 +5,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea, Stack } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { fCurrency } from "../utils/numberFormat";
+import { fCurrency } from "../../utils/numberFormat";
 
 function ProductCard({ product }) {
   const navigate = useNavigate();
