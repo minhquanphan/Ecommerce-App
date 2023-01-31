@@ -21,5 +21,5 @@ const orderSchema = Schema(
   { timestamp: true } //CreatedAt & UpdatedAt
 );
 
-const Cart = mongoose.model("Carts", orderSchema);
+const Cart = mongoose.model("Orders", orderSchema);
 module.exports = Cart;
