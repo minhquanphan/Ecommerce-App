@@ -1,12 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import apiService from "../../app/apiService";
+import { PRODUCT_PER_PAGE } from "../../app/config";
 
 const initialState = {
   isLoading: false,
   error: null,
   productsById: {},
   currentPageProducts: [],
-  updatedProduct: null,
 };
 
 const slice = createSlice({
@@ -23,24 +23,29 @@ const slice = createSlice({
     getProductsSuccess(state, action) {
       state.isLoading = false;
       state.error = null;
-      const { products } = action.payload;
+      const { count, products } = action.payload;
       products.forEach((product) => {
         state.productsById[product._id] = product;
         if (!state.currentPageProducts.includes(product._id)) {
           state.currentPageProducts.push(product._id);
         }
-      }); //fixing duplicated id when loading more pagination
+      });
+      // state.currentPageProducts = products.map((product) => product._id);
+      state.totalProducts = count;
     },
   },
 });
 
-export const getProducts =
-  ({ page, limit = 15 }) =>
+export const getProductList =
+  ({ filterName, page, limit = PRODUCT_PER_PAGE }) =>
   async (dispatch) => {
     dispatch(slice.actions.startLoading());
     try {
       const params = { page, limit };
-      const response = await apiService.get("/products/all", {
+      if (filterName) {
+        params.name = filterName;
+      }
+      const response = await apiService.get("/products/product", {
         params,
       });
       dispatch(slice.actions.getProductsSuccess(response.data));

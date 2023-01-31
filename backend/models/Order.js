@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const cartSchema = Schema(
+const orderSchema = Schema(
   {
     author: { type: Schema.Types.ObjectId, ref: "Users", required: true },
     products: [
@@ -21,5 +21,5 @@ const cartSchema = Schema(
   { timestamp: true } //CreatedAt & UpdatedAt
 );
 
-const Cart = mongoose.model("Carts", cartSchema);
+const Cart = mongoose.model("Carts", orderSchema);
 module.exports = Cart;

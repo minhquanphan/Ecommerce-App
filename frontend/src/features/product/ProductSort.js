@@ -1,5 +1,5 @@
 import React from "react";
-import { FSelect } from "./form";
+import { FSelect } from "../../components/form";
 
 const SORT_OPTIONS = [
   { value: "featured", label: "Featured" },

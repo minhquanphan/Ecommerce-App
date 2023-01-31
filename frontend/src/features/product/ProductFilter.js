@@ -1,5 +1,5 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
-import { FRadioGroup } from "./form";
+import { FRadioGroup } from "../../components/form";
 import ClearAllIcon from "@mui/icons-material/ClearAll";
 
 export const SORT_BY_OPTIONS = [
@@ -20,8 +20,6 @@ export const FILTER_PRICE_OPTIONS = [
 function ProductFilter({ resetFilter }) {
   return (
     <Stack spacing={3} sx={{ p: 3, width: 250 }}>
-      <Stack spacing={1}></Stack>
-
       <Stack spacing={1}>
         <Typography variant="h6" sx={{ fontWeight: 600 }}>
           Category

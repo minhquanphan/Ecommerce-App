@@ -28,14 +28,6 @@ function ProductCard({ product }) {
             alignItems="center"
             justifyContent="flex-end"
           >
-            {/* {product.price && (
-              <Typography
-                component="span"
-                sx={{ color: "text.disabled", textDecoration: "line-through" }}
-              >
-                {fCurrency(product.price)}
-              </Typography>
-            )} */}
             <Typography variant="subtitle1">
               {fCurrency(product.price)}
             </Typography>

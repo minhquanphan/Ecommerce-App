@@ -35,9 +35,9 @@ productController.getAllProducts = catchAsync(async (req, res, next) => {
     res,
     200,
     true,
-    { products, totalPages },
+    { products, count, totalPages },
     null,
-    "Success"
+    "Get product list success"
   );
 });
 
