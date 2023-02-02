@@ -4,8 +4,6 @@ const {
   register,
   updateProfile,
   changePassword,
-  paymentCart,
-  myCart,
   topUpBalance,
   profile,
 } = require("../controllers/user.controllers");
@@ -41,15 +39,6 @@ router.put(
   validate([body("password").exists().notEmpty()]),
   changePassword
 );
-
-router.put(
-  "/:cartId/payment",
-  loginRequired,
-  validate([param("cartId").exists().isString().custom(checkObjectId)]),
-  paymentCart
-);
-
-router.get("/cart", loginRequired, myCart);
 
 router.put(
   "/topup",

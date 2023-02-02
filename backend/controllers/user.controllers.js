@@ -1,6 +1,5 @@
 const bcrypt = require("bcryptjs/dist/bcrypt");
 const { catchAsync, sendResponse, AppError } = require("../helpers/utils");
-const Cart = require("../models/Cart");
 const User = require("../models/User");
 
 // 1. User can create account with email and password ✅
@@ -8,7 +7,7 @@ const User = require("../models/User");
 // 3. Owner can see own account profile ✅
 // 4. Current user can see list of orders ✅
 // 5. Users can change password ✅
-// 6. Users can checkout and pay for cart ✅
+// 6. Users can checkout and pay for order ✅
 // 7. Users can top-up balance ✅
 
 const userController = {};
@@ -79,27 +78,6 @@ userController.changePassword = catchAsync(async (req, res, next) => {
   return sendResponse(res, 200, true, { currentUser }, null, "Success");
 });
 
-userController.myCart = catchAsync(async (req, res, next) => {
-  const { currentUserId } = req;
-  let { page, limit } = req.query;
-
-  page = parseInt(page) || 1;
-  limit = parseInt(limit) || 10;
-  const count = await Cart.countDocuments({ isDeleted: false });
-  const offset = limit * (page - 1);
-  const totalPages = Math.ceil(count / limit);
-
-  const cart = await Cart.find({ author: currentUserId, isDeleted: false })
-    .sort({ createdAt: -1 })
-    .skip(offset)
-    .limit(limit);
-  if (!cart) {
-    throw new AppError(401, "Cart not found");
-  }
-
-  return sendResponse(res, 200, true, { cart, totalPages }, null, "Success");
-});
-
 userController.topUpBalance = catchAsync(async (req, res, next) => {
   const { currentUserId } = req;
   const { balanceAmount } = req.body;
@@ -120,50 +98,6 @@ userController.topUpBalance = catchAsync(async (req, res, next) => {
   );
 
   return sendResponse(res, 200, true, { user }, null, "Successfull top up");
-});
-
-userController.paymentCart = catchAsync(async (req, res, next) => {
-  const { currentUserId } = req;
-  const { cartId } = req.params;
-
-  let currentUser = await User.findById(currentUserId);
-
-  //find the order to pay
-  let cartPending = await Cart.findOne({
-    _id: cartId,
-    author: currentUserId,
-    status: "pending",
-    isDeleted: false,
-  });
-
-  if (!cartPending) {
-    throw new AppError(401, "No pending order found", "error");
-  }
-
-  let total = cartPending.total;
-  let balance = currentUser.balance;
-
-  //check balance
-  if (total > balance) {
-    throw new AppError(403, "Balance not enough", "Top up now");
-  }
-
-  //update new balance
-  currentUser = await User.findByIdAndUpdate(
-    { _id: currentUserId },
-    { balance: balance - total }
-  );
-
-  //update new order
-  cartPending = await Cart.findByIdAndUpdate(
-    {
-      _id: cartId,
-    },
-    { status: "paid" },
-    { new: true }
-  );
-
-  return sendResponse(res, 200, true, { cartPending }, null, "Payment Success");
 });
 
 module.exports = userController;
